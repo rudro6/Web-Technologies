@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+  </head>
+  <body>
+    <?php
+      $usernameErr = $passwordErr = "";
+      $username = $password = "";
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $username_regex = '/^[a-zA-Z0-9._-]{2,}$/';
+        $password_regex = '/^(?=.*[@#$%])[a-zA-Z0-9@#$%]{8,}$/';
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+      
+        if (!preg_match($username_regex, $username)) {
+          echo "Invalid username. Must contain alpha numeric characters, period, dash or underscore only, and must contain at least two (2) characters.";
+        }
+        if (!preg_match($password_regex, $password)) {
+          echo "Invalid password. Must not be less than eight (8) characters and must contain at least one of the special characters (@, #, $, %).";
+        }
+        if (isset($_POST['forgot_password?'])) {
+          echo "Password reset email sent!";
+        }
+        if (isset($_POST['remember'])) {
+          echo "User remembered!";
+        }
+      }
+      function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+      }
+    ?>
+    
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <fieldset>
+    <legend>Login</legend>
+    <label for="username">User Name:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <br>
+    <input type="checkbox" id="remember" name="remember">
+    <label for="remember">Remember Me</label>
+    <br>
+    <br>
+    <input type="submit" value="Login">
+    <a href="#" id="forgot_password_link">Forgot Password?</a>
+    <div id="forgot_password_form" style="display:none;">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <input type="submit" value="Send Password Reset Link" name="forgot_password">
+    </div>
+    </form>
+    </fieldset>
+    <br>
+    <br>
+    <fieldset>
+    <Legend>Change Password</Legend>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <label for="current_password">Current Password:</label>
+    <input type="password" id="current_password" name="current_password" required>
+    <br>
+    <br>
+    <label for="new_password">New Password:</label>
+    <input type="password" id="new_password" name="new_password" required>
+    <br>
+    <br>
+    <label for="retyped_password">Retype New Password:</label>
+    <input type="password" id="retyped_password" name="retyped_password" required>
+    <br>
+    <br>
+    <input type="submit" value="Change Password" name="change_password">
+    </form>
+  </body>
+</html>
