@@ -34,7 +34,7 @@
         return $data;
       }
     ?>
-    
+
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <fieldset>
     <legend>Login</legend>
@@ -79,5 +79,44 @@
     <br>
     <input type="submit" value="Change Password" name="change_password">
     </form>
+    </fieldset>
+    <br>
+    <br>
+    <?php
+      $error = '';
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $allowed_formats = array('jpg', 'jpeg', 'png');
+        $file_name = $_FILES['picture']['name'];
+        $file_size = $_FILES['picture']['size'];
+        $file_tmp = $_FILES['picture']['tmp_name'];
+        $file_type = $_FILES['picture']['type'];
+        $file_ext = strtolower(end(explode('.', $file_name)));
+
+        if (empty($file_name)) {
+          $error = 'Please select a picture to upload';
+        } else if (!in_array($file_ext, $allowed_formats)) {
+          $error = 'Only jpeg, jpg, and png formats are allowed';
+        } else if ($file_size > 4*1024*1024) {
+          $error = 'Picture size should not be more than 4MB';
+        } else {
+          // File passed all validations, perform further actions
+          // For example, move file to a specific directory and store the file name in database
+          move_uploaded_file($file_tmp, 'uploads/' . $file_name);
+          echo 'Picture uploaded successfully';
+        }
+      }
+    ?>
+
+    <fieldset>
+    <legend>Profile Picture</legend>
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="picture" accept="image/jpeg, image/jpg, image/png"><br>
+      <input type="submit" value="Upload">
+    </form>
+    <?php
+      if ($error) {
+        echo '<p style="color:red">' . $error . '</p>';
+      }
+    ?>
   </body>
 </html>
