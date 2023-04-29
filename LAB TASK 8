@@ -1,1 +1,184 @@
+<form id="login-form" action="login.php" method="POST">
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+  
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+  
+  <button type="submit">Login</button>
+</form>
 
+const loginForm = document.querySelector('#login-form');
+
+loginForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+  
+  if (!email || !password) {
+    displayError('Please fill in all fields');
+    return;
+  }
+  
+  loginForm.submit();
+});
+
+function displayError(message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.classList.add('error');
+  errorDiv.innerText = message;
+  
+  const form = document.querySelector('#login-form');
+  form.insertBefore(errorDiv, form.firstChild);
+}
+
+
+<form id="registration-form" action="register.php" method="POST">
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+  
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+  
+  <label for="confirm-password">Confirm Password:</label>
+  <input type="password" id="confirm-password" name="confirm-password" required>
+  
+  <button type="submit">Register</button>
+</form>
+
+
+const registrationForm = document.querySelector('#registration-form');
+
+registrationForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+  const confirmPassword = document.querySelector('#confirm-password').value;
+  
+  if (!email || !password || !confirmPassword) {
+    displayError('Please fill in all fields');
+    return;
+  }
+  
+  if (password !== confirmPassword) {
+    displayError('Passwords do not match');
+    return;
+  }
+  
+  if (password.length < 8) {
+    displayError('Password must be at least 8 characters long');
+    return;
+  }
+  
+  registrationForm.submit();
+});
+
+function displayError(message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.classList.add('error
+
+
+<form id="edit-profile-form" action="edit-profile.php" method="POST">
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required value="user@example.com">
+  
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+  
+  <label for="confirm-password">Confirm Password:</label>
+  <input type="password" id="confirm-password" name="confirm-password" required>
+  
+  <button type="submit">Save Changes</button>
+</form>
+
+
+const editProfileForm = document.querySelector('#edit-profile-form');
+
+editProfileForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+  const confirmPassword = document.querySelector('#confirm-password').value;
+  
+  if (!email || !password || !confirmPassword) {
+    displayError('Please fill in all fields');
+    return;
+  }
+  
+  if (password !== confirmPassword) {
+    displayError('Passwords do not match');
+    return;
+  }
+  
+  if (password.length < 8) {
+    displayError('Password must be at least 8 characters long');
+    return;
+  }
+  
+  editProfileForm.submit();
+});
+
+function displayError(message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.classList.add('error');
+  errorDiv.innerText = message;
+  
+  const form = document.querySelector('#edit-profile-form');
+  form.insertBefore(errorDiv, form.firstChild);
+}
+
+
+<form id="reservation-form" action="reservation.php" method="POST">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+  
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+  
+  <label for="phone">Phone:</label>
+  <input type="tel" id="phone" name="phone" required>
+  
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" required>
+  
+  <button type="submit">Make Reservation</button>
+</form>
+
+
+const reservationForm = document.querySelector('#reservation-form');
+
+reservationForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  
+  const name = document.querySelector('#name').value;
+  const email = document.querySelector('#email').value;
+  const phone = document.querySelector('#phone').value;
+  const date = document.querySelector('#date').value;
+  
+  if (!name || !email || !phone || !date) {
+    displayError('Please fill in all fields');
+    return;
+  }
+  
+  if (!isValidEmail(email)) {
+    displayError('Please enter a valid email address');
+    return;
+  }
+  
+  if (!isValidPhone(phone)) {
+    displayError('Please enter a valid phone number');
+    return;
+  }
+  
+  reservationForm.submit();
+});
+
+function displayError(message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.classList.add('error');
+  errorDiv.innerText = message;
+  
+  const form = document
